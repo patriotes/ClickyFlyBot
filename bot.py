@@ -1,14 +1,14 @@
-from os import environ
+import os
 import datetime
 import aiohttp
+import ssl
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
-API_ID = environ.get('API_ID')
-API_HASH = environ.get('API_HASH')
-BOT_TOKEN = environ.get('BOT_TOKEN')
-API_KEY = environ.get('API_KEY')
-
+API_ID = os.environ.get('API_ID')
+API_HASH = os.environ.get('API_HASH')
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
+API_KEY = os.environ.get('API_KEY')
 
 bot = Client('clickyfly bot',
              api_id=API_ID,
@@ -59,7 +59,7 @@ async def get_shortlink(link):
     params = {'api': API_KEY, 'url': link}
 
     async with aiohttp.ClientSession() as session:
-        async with session.get(url, params=params, raise_for_status=True) as response:
+        async with session.get(url, params=params, ssl=ssl.create_default_context(), raise_for_status=True) as response:
             data = await response.json()
             return data["shortenedUrl"]
 
