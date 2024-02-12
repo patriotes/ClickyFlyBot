@@ -21,14 +21,14 @@ bot = Client('clickyfly bot',
 @bot.on_message(filters.command('start') & filters.private)
 async def start(bot, message):
     await message.reply(
-        text=f"**Hi {message.chat.first_name}!** \n\nThis is **ClickyFly URL Shorter Bot**. Just send me any big link and get short link.",
+        text=f"**Bonjour {message.chat.first_name}!** \n\nCeci est le bot **ClickyFly URL Shorter**. Envoyez-moi n'importe quel lien long et obtenez un lien raccourci.",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton('Bots Updates Channel', url='https://t.me/Discovery_Updates')
+                    InlineKeyboardButton('Chaîne de mises à jour des bots', url='https://t.me/Discovery_Updates')
                 ],
                 [
-                    InlineKeyboardButton('Support Group', url='https://t.me/linux_repo')
+                    InlineKeyboardButton('Groupe de support', url='https://t.me/linux_repo')
                 ]
             ]
         )
@@ -41,18 +41,18 @@ async def link_handler(bot, message):
     try:
         short_link = await get_shortlink(link)
         await message.reply(
-            text=f"Here is your short link: {short_link}",
+            text=f"Voici votre lien raccourci : {short_link}",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton('Open Link', url=short_link)
+                        InlineKeyboardButton('Ouvrir le lien', url=short_link)
                     ]
                 ]
             ),
             quote=True
         )
     except Exception as e:
-        await message.reply(f'Error: {e}', quote=True)
+        await message.reply(f'Erreur : {e}', quote=True)
 
 async def get_shortlink(link):
     url = 'https://clickyfly.in/api'
